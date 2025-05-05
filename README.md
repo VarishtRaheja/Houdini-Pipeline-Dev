@@ -27,23 +27,23 @@ Welcome to the Houdini HDA and Python Scripts repository! This project contains 
 <a id="rbd-checker">3. In this script I have combined both VEX and Python to check for duplicated names<i>(name attribute)</i>. I have also added a feature to change the color of the node to see if duplicate names exist. Red for duplicates and green is good to go.
    <p> Lets start with creating a simple voronoi fracture with a basic 3d geometry shape(box)
    
-   ![Simple Voronoi Fracture setup](./images/Task3.jpg)
+   ![Simple Voronoi Fracture setup](./images/rbd-checker/Task3.jpg)
 
    Then create a wrangle node to manually "fake" a duplication by doing the following.
-   ![Create a duplicate](./images/Task4.jpg)
+   ![Create a duplicate](./images/rbd-checker/Task4.jpg)
 
    I have bypassed the wrangle node here to show you that we can create an event to change the color of the node depending on cerain actions. So if the duplicate does not exist then the node turns green else red in color.
-   ![Change in color](./images/Task5.jpg)
+   ![Change in color](./images/rbd-checker/Task5.jpg)
 
    Then I have created a wrangle to initialise an empty list and add all the points with their corresponding name attribute.
-   ![Appending to empty list](./images/Task6.jpg)
+   ![Appending to empty list](./images/rbd-checker/Task6.jpg)
 
    This is the main part of the python code where the color of the node is being set and the names are being registered to a list which are not duplicates. The duplicated name is then conditioned check and passed downstream as an attribute to keep proceduralism alive. This is then being split based on the attribute and we can visulise it by adding a different color attribute to each stream before merging it back together.
 
-   ![Split the attribute](./images/Task7.jpg)
-   ![Visualisation](./images/Task9.jpg)
+   ![Split the attribute](./images/rbd-checker/Task7.jpg)
+   ![Visualisation](./images/rbd-checker/Task9.jpg)
 
-   + The python script can be found here: [Code](https://VarishtRaheja.github.com/tree/main/Scripts/RBD_Check.py)
+   + The python script can be found here: [Code](https://github.com/VarishtRaheja/Houdini-Pipeline-Dev/blob/main/Scripts/RBD_Check.py)
 
 ---
 

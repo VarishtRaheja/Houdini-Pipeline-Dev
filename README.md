@@ -11,9 +11,9 @@ Welcome to the Houdini HDA and Python Scripts repository! This project contains 
 <break>
 
 ### Projects:
-   [1. Backup Tool](#backupTool)
-   [2. Json Exporter](#jsonExporter)
-   [3. RBD Attributes Checker](#rbd-checker)
+1. [Backup Tool](#backupTool)
+2. [Json Exporter](#jsonExporter)
+3. [RBD Attributes Checker](#rbd-checker)
 
 
 

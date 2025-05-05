@@ -25,6 +25,8 @@ Welcome to the Houdini HDA and Python Scripts repository! This project contains 
 
 #### 3. RBD Checker
 
++ The python script can be found here: [Code](https://github.com/VarishtRaheja/Houdini-Pipeline-Dev/blob/main/Scripts/RBD_Check.py)
+
 <a id="rbd-checker">In this script I have combined both VEX and Python to check for duplicated names<i>(name attribute)</i>. I have also added a feature to change the color of the node to see if duplicate names exist. Red for duplicates and green is good to go.
    <p> Lets start with creating a simple voronoi fracture with a basic 3d geometry shape(box)
    
@@ -48,7 +50,24 @@ Welcome to the Houdini HDA and Python Scripts repository! This project contains 
 
    ![Visualisation](./images/rbd-checker/Task9.jpg)
 
-   + The python script can be found here: [Code](https://github.com/VarishtRaheja/Houdini-Pipeline-Dev/blob/main/Scripts/RBD_Check.py)
 
 ---
 
+## Steps to download and install HDA
+
+Installing the HDA in Houdini
+1. Method: Manual Installation
+- Open Houdini.
+- Go to Assets -> Install Asset Library.
+- Locate the .hda file on your computer and select it.
+- Click Install.
+
+<break>
+
+2. Method: Installing in Houdini Preferences
+- Place the .hda file in your Houdini preferences folder:
+Documents/HoudiniXX.X/otls/
+- (Replace XX.X with your Houdini version, e.g., 20.5.)
+- Restart Houdini, and it should automatically load the asset.
+
+---

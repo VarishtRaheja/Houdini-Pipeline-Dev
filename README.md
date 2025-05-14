@@ -14,6 +14,7 @@ Welcome to the Houdini HDA and Python Scripts repository! This project contains 
 1. [Backup Tool](#backupTool)
 2. [Json Exporter](#jsonExporter)
 3. [RBD Attributes Checker](#rbd-checker)
+4. [Asset Filter](#asset-filter)
 
 
 
@@ -50,6 +51,95 @@ Welcome to the Houdini HDA and Python Scripts repository! This project contains 
 
    ![Visualisation](./images/rbd-checker/Task9.jpg)
 
+#### 4. Asset Filter
+<a id=asset-filter> In this script/HDA, path sequence and files are being managed based on type and whether certain files/directories based on extension want to be included or excluded.</a>
+
++ Main python code: [Code](https://github.com/VarishtRaheja/Houdini-Pipeline-Dev/blob/main/Scripts/Asset_Filter.py)
+
+<break>
+   
+Buttons have been added for further functionality.
+
+```
+# This button will remove all "file" type geos which are being imported from the files speicifed by the user.
+   def buttonPress():
+       obj_node = hou.node("/obj/Asset_Filter/asset_filter")
+       for child in obj_node.children():
+           if child.type().name()=="file":
+               child.destroy()
+               c = hou.Color()
+               c.setRGB((1,0,0))
+       hou.ui.displayMessage("File nodes deleted.")
+
+    ```
+
+   Wrangle code to split file path and name:
+
+```
+   // Split the full path name into name and dir path.
+   string dir, name;
+   splitpath(s@path,dir,name);
+
+   // Accessing file attributes from HDA
+   string exclude_file = chs("../exclude_file");
+   string include_file = chs("../include_file");
+
+   // Accessing folder attributes from HDA
+   string exclude_dir = chs("../exclude_dir");
+   string include_dir = chs("../include_dir");
+
+   // unpack folder/file
+   string pack_dir = chs("../pack_dir");
+
+   // Adding to delete grps the files that cant be found.
+   if(exclude_file != "" && re_find(exclude_file,name) != ""){
+       setpointgroup(geoself(),"delete",0,1,"set");
+   }
+   if(include_file != "" && re_find(include_file,name) == ""){
+       setpointgroup(geoself(),"delete",0,1,"set");
+   }
+   if(exclude_dir != "" && re_find(exclude_dir,name) != ""){
+       setpointgroup(geoself(),"delete",0,1,"set");
+   }
+   if(include_dir != "" && re_find(include_dir,name) == ""){
+       setpointgroup(geoself(),"delete",0,1,"set");
+   }
+
+   if(pack_dir != "" && re_find(include_dir,name) != ""){
+       setpointgroup(geoself(),"delete",0,1,"set");
+   }
+
+``` 
+Then to split sequence and non-sequence
+
+```
+   // Split the full path name into name and dir path.
+   string dir, name;
+   splitpath(s@path,dir,name);
+
+   // Get the files with bgeo extension
+   string pattern = re_find("[\.][0-9]+[\.]bgeo",name);
+
+   // Replace the extension with empty string to get frame number only.
+   string frame = re_replace("[\.]bgeo","",pattern)[1:];
+
+   // Creating the padding
+   string pad = sprintf("\$\F%d",len(frame));
+
+   // converting string to float for sequences
+   int f = frame != "" ? atoi(frame) : -1000;
+
+   if(f != -1000){
+       setpointgroup(geoself(),"sequence",i@ptnum,1,"set");
+       s@__name = re_replace(frame,"",name);
+       i@__frame = f;
+       s@path = re_replace(frame,pad,name);
+   } else{
+       s@path = re_replace(frame,"",name);
+   }
+   string full_path = concat(dir,"/",s@path);
+
+```
 
 ---
 
@@ -70,4 +160,3 @@ Documents/HoudiniXX.X/otls/
 - (Replace XX.X with your Houdini version, e.g., 20.5.)
 - Restart Houdini, and it should automatically load the asset.
 
----

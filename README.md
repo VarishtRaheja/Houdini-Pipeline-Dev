@@ -76,38 +76,38 @@ Buttons have been added for further functionality.
    Wrangle code to split file path and name:
 
 ```
-   // Split the full path name into name and dir path.
-   string dir, name;
-   splitpath(s@path,dir,name);
+// Split the full path name into name and dir path.
+string dir, name;
+splitpath(s@path,dir,name);
 
-   // Accessing file attributes from HDA
-   string exclude_file = chs("../exclude_file");
-   string include_file = chs("../include_file");
+// Accessing file attributes from HDA
+string exclude_file = chs("../exclude_file");
+string include_file = chs("../include_file");
 
-   // Accessing folder attributes from HDA
-   string exclude_dir = chs("../exclude_dir");
-   string include_dir = chs("../include_dir");
+// Accessing folder attributes from HDA
+string exclude_dir = chs("../exclude_dir");
+string include_dir = chs("../include_dir");
 
-   // unpack folder/file
-   string pack_dir = chs("../pack_dir");
+// unpack folder/file
+string pack_dir = chs("../pack_dir");
 
-   // Adding to delete grps the files that cant be found.
-   if(exclude_file != "" && re_find(exclude_file,name) != ""){
-       setpointgroup(geoself(),"delete",0,1,"set");
-   }
-   if(include_file != "" && re_find(include_file,name) == ""){
-       setpointgroup(geoself(),"delete",0,1,"set");
-   }
-   if(exclude_dir != "" && re_find(exclude_dir,name) != ""){
-       setpointgroup(geoself(),"delete",0,1,"set");
-   }
-   if(include_dir != "" && re_find(include_dir,name) == ""){
-       setpointgroup(geoself(),"delete",0,1,"set");
-   }
+// Adding to delete grps the files that cant be found.
+if(exclude_file != "" && re_find(exclude_file,name)!=""){
+    setpointgroup(geoself(),"delete",i@ptnum,1,"set");
+}
+if(include_file != "" && re_find(include_file,name) == ""){
+    setpointgroup(geoself(),"delete",i@ptnum,1,"set");
+}
+if(exclude_dir != "" && re_find(exclude_dir,dir) != ""){
+    setpointgroup(geoself(),"delete",i@ptnum,1,"set");
+}
+if(include_dir != "" && re_find(include_dir,dir) == ""){
+    setpointgroup(geoself(),"delete",i@ptnum,1,"set");
+}
 
-   if(pack_dir != "" && re_find(include_dir,name) != ""){
-       setpointgroup(geoself(),"delete",0,1,"set");
-   }
+if(pack_dir != "" && re_find(pack_dir,name) != ""){
+    setpointgroup(geoself(),"unpack_grp",i@ptnum,1,"set");
+}
 
 ``` 
 Then to split sequence and non-sequence

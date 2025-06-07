@@ -51,6 +51,8 @@ Welcome to the Houdini HDA and Python Scripts repository! This project contains 
 
    ![Visualisation](./images/rbd-checker/Task9.jpg)
 
+---
+
 #### 4. Asset Filter
 <a id=asset-filter> In this script/HDA, path sequence and files are being managed based on type and whether certain files/directories based on extension want to be included or excluded.</a>
 
@@ -60,7 +62,7 @@ Welcome to the Houdini HDA and Python Scripts repository! This project contains 
    
 Buttons have been added for further functionality.
 
-```
+```py
 # This button will remove all "file" type geos which are being imported from the files speicifed by the user.
    def buttonPress():
        obj_node = hou.node("/obj/Asset_Filter/asset_filter")
@@ -71,11 +73,11 @@ Buttons have been added for further functionality.
                c.setRGB((1,0,0))
        hou.ui.displayMessage("File nodes deleted.")
 
-    ```
+```
 
    Wrangle code to split file path and name:
 
-```
+```C
 // Split the full path name into name and dir path.
 string dir, name;
 splitpath(s@path,dir,name);
@@ -112,19 +114,19 @@ if(pack_dir != "" && re_find(pack_dir,name) != ""){
 ``` 
 Then to split sequence and non-sequence
 
-```
+```C
    // Split the full path name into name and dir path.
    string dir, name;
    splitpath(s@path,dir,name);
 
    // Get the files with bgeo extension
-   string pattern = re_find("[\.][0-9]+[\.]bgeo",name);
+   string pattern = re_find("[\\.][0-9]+[\\.]bgeo",name);
 
    // Replace the extension with empty string to get frame number only.
-   string frame = re_replace("[\.]bgeo","",pattern)[1:];
+   string frame = re_replace("[\\.]bgeo","",pattern)[1:];
 
    // Creating the padding
-   string pad = sprintf("\$\F%d",len(frame));
+   string pad = sprintf("\\$\\F%d",len(frame));
 
    // converting string to float for sequences
    int f = frame != "" ? atoi(frame) : -1000;
